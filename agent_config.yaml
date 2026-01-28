@@ -1,0 +1,30 @@
+# CAM-001: Agentic Income Assessment Framework
+# RBI-Compliant, Explainable, Zero External Dependencies
+agents:
+  parser:
+    name: "Statement_Parser"
+    goal: "Extract 99% accurate transaction data from Indian bank PDFs"
+    rules:
+      - "Identify SALARY, BUSINESS credits vs internal transfers"
+      - "Flag RETURN, BOUNCE, CHEQUE_RETURN keywords"
+      - "Calculate AMB from closing balances"
+ 
+  analyst:
+    name: "Financial_Analyst"
+    goal: "Calculate RBI-mandated KPIs: FOIR < 50%, AMB stability"
+    rules:
+      - "FOIR = (Existing_EMI + Proposed_EMI) / Net_Monthly_Income"
+      - "Income stability: 3-month avg > 80% of peak month"
+      - "Business income > 60% of total credits"
+ 
+  auditor:
+    name: "Risk_Auditor"
+    goal: "Triangulate GST vs Bank. Flag under-reporting >20%"
+    rules:
+      - "GST Turnover must be > 80% of Bank Business Credits"
+      - "High-risk if bounced transactions > 2 in 6 months"
+      - "Final verdict: GO/NO-GO with NPA probability"
+kpi_thresholds:
+  foir_max: 0.50
+  gst_variance_max: 0.20
+  bounce_threshold: 2
